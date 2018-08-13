@@ -1,7 +1,7 @@
 {
   "name": "phaser-webpack-typescript-sample",
   "version": "0.0.1",
-  "description": "Simple Phaser 3 sample using Webpack and Typescript",
+  "description": "New Project WIP",
   "main": "src/index.ts",
   "scripts": {
     "build": "webpack --mode production",
@@ -10,7 +10,6 @@
     "postinstall": "yarn run update_ts_defs"
   },
   "author": "Nate Collings <nate@natecollings.com>",
-  "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.0",
     "raw-loader": "^0.5.1",
