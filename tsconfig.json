@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2017",
+      "dom",
+      "scripthost"
+    ],
+    "module": "es6",
+    "sourceMap": true,
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false
+}
