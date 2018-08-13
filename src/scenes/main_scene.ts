@@ -1,23 +1,23 @@
+import Ship from "../objects/ship";
+
 class MainScene extends Phaser.Scene {
+  private player: Ship;
+
   constructor() {
     super({ key: "MainScene" });
   }
 
-  preload() {
-    this.load.image("logo", "assets/logo.png");
+  create() {
+    // Without `any`, I'm getting this:
+    // Property 'sys' is missing in type '{ scene: this; }'.
+    // Some sort of issue with the Phaser.GameObjects.Graphics
+    // type definition maybe
+    const args: any = { scene: this, options: {} };
+    this.player = new Ship(args);
   }
 
-  create() {
-    const logo = this.add.image(400, 150, "logo");
-
-    this.tweens.add({
-      targets: logo,
-      y: 450,
-      duration: 2000,
-      ease: "Power2",
-      yoyo: true,
-      loop: -1,
-    });
+  update() {
+    this.player.update();
   }
 }
 

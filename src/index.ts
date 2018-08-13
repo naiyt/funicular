@@ -4,10 +4,16 @@ import MainScene from "./scenes/main_scene";
 
 const config: GameConfig = {
   type: Phaser.AUTO,
-  parent: "phaser-typescript-example",
+  parent: "funicular",
   width: 800,
   height: 800,
   scene: MainScene,
+  physics: {
+    default: "arcade",
+    arcade: {
+      debug: false,
+    },
+  },
 };
 
 class Game extends Phaser.Game {
