@@ -3,17 +3,21 @@ import Ship from "../objects/ship";
 class MainScene extends Phaser.Scene {
   private player: Ship;
 
-  constructor() {
-    super({ key: "MainScene" });
+  preload() {
+    // TODO - pull out the sprite keys
+    this.load.image("ship", "assets/ship.png");
   }
 
   create() {
-    // Without `any`, I'm getting this:
-    // Property 'sys' is missing in type '{ scene: this; }'.
-    // Some sort of issue with the Phaser.GameObjects.Graphics
-    // type definition maybe
-    const args: any = { scene: this, options: {} };
-    this.player = new Ship(args);
+    this.player = new Ship(
+      this,
+      this.scene.systems.canvas.width / 2,
+      this.scene.systems.canvas.height / 2,
+      "ship",
+    );
+
+    this.add.existing(this.player);
+    this.physics.world.enable(this.player);
   }
 
   update() {

@@ -1,39 +1,36 @@
-class Ship extends Phaser.GameObjects.Graphics {
-  private currentScene: Phaser.Scene;
-  private shipSize: number;
+class Ship extends Phaser.GameObjects.Sprite {
+  public body: Phaser.Physics.Arcade.Body;
+  private cursors: CursorKeys;
+  private speed: number;
 
-  /* Lifecycle */
-
-  constructor(params: any) {
-    super(params.scene, params.options);
-
-    this.currentScene = params.scene;
-    this.shipSize = 30;
-    this.initShip();
+  constructor(scene: Phaser.Scene, x: number, y: number, key: string) {
+    super(scene, x, y, key);
+    this.cursors = scene.input.keyboard.createCursorKeys();
+    this.speed = 100;
   }
 
   update() {
-
+    const velocity = this.getVelocity();
+    this.body.setVelocity(velocity.x, velocity.y);
   }
 
-  /* Setup */
+  private getVelocity(): Phaser.Math.Vector2 {
+    let x = 0;
+    let y = 0;
 
-  private initShip() {
-    this.x = this.currentScene.sys.canvas.width / 2;
-    this.y = this.currentScene.sys.canvas.height / 2;
+    if(this.cursors.left && this.cursors.left.isDown) {
+      x = -1 * this.speed;
+    } else if(this.cursors.right && this.cursors.right.isDown) {
+      x = this.speed;
+    }
 
-    this.lineStyle(1, 0xffffff);
+    if(this.cursors.up && this.cursors.up.isDown) {
+      y = -1 * this.speed;
+    } else if (this.cursors.down && this.cursors.down.isDown) {
+      y = 1 * this.speed;
+    }
 
-    this.strokeTriangle(
-      -this.shipSize,
-      this.shipSize,
-      this.shipSize,
-      this.shipSize,
-      0,
-      -this.shipSize,
-    );
-
-    this.currentScene.add.existing(this);
+    return new Phaser.Math.Vector2(x, y);
   }
 }
 

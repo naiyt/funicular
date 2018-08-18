@@ -14,6 +14,12 @@ const config: GameConfig = {
       debug: false,
     },
   },
+  input: {
+    keyboard: true,
+    mouse: false,
+    touch: false,
+    gamepad: false,
+  },
 };
 
 class Game extends Phaser.Game {
