@@ -1,5 +1,8 @@
+import Bullet from "./bullet";
+
 class Ship extends Phaser.GameObjects.Sprite {
   public body: Phaser.Physics.Arcade.Body;
+  public bullets: Bullet[];
   private cursors: CursorKeys;
   private speed: number;
 
@@ -7,11 +10,16 @@ class Ship extends Phaser.GameObjects.Sprite {
     super(scene, x, y, key);
     this.cursors = scene.input.keyboard.createCursorKeys();
     this.speed = 500;
+    this.bullets = [];
   }
 
   update() {
     const velocity = this.getVelocity();
     this.body.setVelocity(velocity.x, velocity.y);
+    this.fireBullets();
+    for(const bullet of this.bullets) {
+      bullet.update();
+    }
   }
 
   private getVelocity(): Phaser.Math.Vector2 {
@@ -44,6 +52,20 @@ class Ship extends Phaser.GameObjects.Sprite {
     }
 
     return new Phaser.Math.Vector2(x, y);
+  }
+
+  private fireBullets() {
+    if(this.cursors.space && this.cursors.space.isDown) {
+      const bullet = new Bullet(
+        this.scene,
+        this.x,
+        this.y,
+        "bullet",
+      );
+      this.scene.add.existing(bullet);
+      this.scene.physics.world.enable(bullet);
+      this.bullets.push(bullet);
+    }
   }
 }
 

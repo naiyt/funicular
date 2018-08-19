@@ -6,6 +6,7 @@ class MainScene extends Phaser.Scene {
   preload() {
     // TODO - pull out the sprite keys
     this.load.image("ship", "assets/ship.png");
+    this.load.image("bullet", "assets/bullet.png");
   }
 
   create() {
