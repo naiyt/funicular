@@ -10,6 +10,10 @@ class Bullet extends Phaser.GameObjects.Sprite {
   update() {
     this.body.setVelocity(0, -this.speed);
   }
+
+  outOfBounds() {
+    return this.x < 0 || this.y < 0 || this.x > this.scene.sys.canvas.width || this.y > this.scene.sys.canvas.height;
+  }
 }
 
 export default Bullet;

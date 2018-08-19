@@ -72,6 +72,7 @@
       false
     ],
     "prefer-method-signature": false,
+    "prefer-for-of": false,
     "prefer-template": [
       true,
       "allow-single-concat"

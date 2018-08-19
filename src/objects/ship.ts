@@ -17,8 +17,15 @@ class Ship extends Phaser.GameObjects.Sprite {
     const velocity = this.getVelocity();
     this.body.setVelocity(velocity.x, velocity.y);
     this.fireBullets();
-    for(const bullet of this.bullets) {
+
+    // Iterate backwards, so we can splice without issues
+    for(let i = this.bullets.length -1; i >= 0; i--) {
+      const bullet = this.bullets[i];
       bullet.update();
+      if(bullet.outOfBounds()) {
+        bullet.destroy();
+        this.bullets.splice(i, 1);
+      }
     }
   }
 
